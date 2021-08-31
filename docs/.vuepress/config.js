@@ -6,7 +6,33 @@ module.exports = {
       lang: 'en-US'
     },
   },
+  markdown: {
+    extendMarkdown: (md) => {
+      md.use(require("markdown-it-katex"));
+    },
+  },
+  head: [
+    [
+      "link",
+      {
+        rel: "stylesheet",
+        href:
+          "https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.5.1/katex.min.css",
+      },
+    ],
+    [
+      "link",
+      {
+        rel: "stylesheet",
+        href:
+          "https://cdn.jsdelivr.net/github-markdown-css/2.2.1/github-markdown.css",
+      },
+    ],
+  ],
   base: process.env.VUEPRESS_BASE || '/',
+  plugins: [
+    'vuepress-plugin-element-tabs'
+  ],
   themeConfig: {
     repo: 'tharsis/ethermint',
     docsRepo: 'tharsis/ethermint',
@@ -14,8 +40,17 @@ module.exports = {
     docsDir: 'docs',
     editLinks: true,
     custom: true,
+    project: {
+      name: 'Ethermint',
+      denom: 'PHOTON',
+      ticker: 'ETHM',
+      rpc_url: '',
+      rpc_url_local: 'http://localhost:8545/',
+      chain_id: '9000',
+      block_explorer_url: '',
+    },
     logo: {
-      src: '/logo.svg',
+      src: '/ethermint-logo-horizontal-alpha.svg',
     },
     algolia: {
       id: 'BH4D9OD16A',
@@ -27,9 +62,11 @@ module.exports = {
     },
     sidebar: {
       auto: false,
-      nav: [{
+      nav: [
+        {
           title: 'Reference',
-          children: [{
+          children: [
+            {
               title: 'Introduction',
               directory: true,
               path: '/intro'
@@ -49,10 +86,70 @@ module.exports = {
               directory: true,
               path: '/core'
             },
+          ]
+        },
+        {
+          title: 'Guides',
+          children: [
             {
-              title: 'Guides',
+              title: 'Localnet',
               directory: true,
-              path: '/guides'
+              path: '/guides/localnet'
+            },
+            {
+              title: 'Keys and Wallets',
+              directory: true,
+              path: '/guides/keys-wallets'
+            },
+            {
+              title: 'Ethereum Tooling',
+              directory: true,
+              path: '/guides/tools'
+            },
+            {
+              title: 'Validators',
+              directory: true,
+              path: '/guides/validators'
+            },
+            {
+              title: 'Key Management System',
+              directory: true,
+              path: '/guides/kms'
+            },
+          ]
+        },
+        {
+          title: 'APIs',
+          children: [
+            {
+              title: 'JSON-RPC',
+              directory: true,
+              path: '/api/json-rpc'
+            },
+            {
+              title: 'Protobuf Reference',
+              directory: false,
+              path: '/api/proto-docs'
+            },
+          ]
+        },
+        {
+          title: 'Testnet',
+          children: [
+            {
+              title: 'Join Testnet',
+              directory: false,
+              path: '/testnet/join'
+            },
+            {
+              title: 'Token Faucet',
+              directory: false,
+              path: '/testnet/faucet'
+            },
+            {
+              title: 'Deploy Node on Cloud',
+              directory: false,
+              path: '/testnet/cloud_providers'
             }
           ]
         },
@@ -65,17 +162,18 @@ module.exports = {
           }]
         }, {
           title: 'Resources',
-          children: [{
+          children: [
+            {
               title: 'Ethermint API Reference',
-              path: 'https://godoc.org/github.com/tharsis/ethermint'
+              path: 'https://pkg.go.dev/github.com/tharsis/ethermint'
             },
             {
               title: 'Cosmos REST API Spec',
               path: 'https://cosmos.network/rpc/'
             },
             {
-              title: 'Ethereum JSON RPC API Reference',
-              path: 'https://eth.wiki/json-rpc/API'
+              title: 'JSON-RPC API Reference',
+              path: '/api/json-rpc/endpoints'
             }
           ]
         }
@@ -86,13 +184,13 @@ module.exports = {
       chat: {
         title: 'Developer Chat',
         text: 'Chat with Ethermint developers on Discord.',
-        url: 'https://discordapp.com/channels/669268347736686612',
+        url: 'https://discord.gg/3ZbxEq4KDu',
         bg: 'linear-gradient(103.75deg, #1B1E36 0%, #22253F 100%)'
       },
       forum: {
         title: 'Ethermint Developer Forum',
         text: 'Join the Ethermint Developer Forum to learn more.',
-        url: 'https://forum.cosmos.network/',
+        url: 'https://forum.cosmos.network/c/ethermint',
         bg: 'linear-gradient(221.79deg, #3D6B99 -1.08%, #336699 95.88%)',
         logo: 'ethereum-white'
       },
@@ -105,61 +203,75 @@ module.exports = {
     footer: {
       logo: '/logo-bw.svg',
       textLink: {
-        text: 'tharsis.finance/ethermint',
-        url: 'https://tharsis.finance/ethermint'
+        text: 'ethermint.dev',
+        url: 'https://ethermint.dev'
       },
-      services: [{
+      services: [
+        {
           service: 'github',
           url: 'https://github.com/tharsis/ethermint'
-        }
+        },
+        {
+          service: "twitter",
+          url: "https://twitter.com/ethermint",
+        },
+        {
+          service: "linkedin",
+          url: "https://www.linkedin.com/company/tharsis-finance/",
+        },
+        {
+          service: "medium",
+          url: "https://medium.com/@tharsis_labs",
+        },
       ],
-      smallprint: 'This website is maintained by Tharsis.',
+      smallprint: 'This website is maintained by Tharsis Labs Ltd.',
       links: [{
-          title: 'Documentation',
-          children: [{
-              title: 'Cosmos SDK Docs',
-              url: 'https://docs.cosmos.network'
-            },
-            {
-              title: 'Ethereum Docs',
-              url: 'https://ethereum.org/developers'
-            },
-            {
-              title: 'Tendermint Core Docs',
-              url: 'https://docs.tendermint.com'
-            }
-          ]
+        title: 'Documentation',
+        children: [{
+          title: 'Cosmos SDK Docs',
+          url: 'https://docs.cosmos.network/master/'
         },
         {
-          title: 'Community',
-          children: [{
-              title: 'Cosmos Community',
-              url: 'https://discord.gg/W8trcGV'
-            },
-            {
-              title: 'Ethermint Forum',
-              url: 'https://forum.cosmos.network/c/ethermint'
-            }
-          ]
+          title: 'Ethereum Docs',
+          url: 'https://ethereum.org/developers'
         },
         {
-          title: 'Contributing',
-          children: [{
-              title: 'Contributing to the docs',
-              url: 'https://github.com/tharsis/ethermint/tree/main/docs'
-            },
-            {
-              title: 'Source code on GitHub',
-              url: 'https://github.com/tharsis/ethermint/blob/main/docs/DOCS_README.md'
-            }
-          ]
+          title: 'Tendermint Core Docs',
+          url: 'https://docs.tendermint.com'
         }
+        ]
+      },
+      {
+        title: 'Community',
+        children: [{
+          title: 'Ethermint Community',
+          url: 'https://discord.gg/3ZbxEq4KDu'
+        },
+        {
+          title: 'Ethermint Forum',
+          url: 'https://forum.cosmos.network/c/ethermint'
+        }
+        ]
+      },
+      {
+        title: 'Tharsis',
+        children: [
+          {
+            title: 'Jobs at Tharsis',
+            url: 'https://tharsis.notion.site/Jobs-at-Tharsis-5a1642eb89b34747ae6f2db2d356fc0d'
+          }
+        ]
+      }
       ]
     },
     versions: [
       {
         "label": "main",
         "key": "main"
+      },
+      {
+        "label": "v0.5",
+        "key": "v0.5"
       }
     ],
   }

@@ -6,9 +6,15 @@ parent:
 
 # Guides
 
-This section contains different guides to use popular Ethereum tools with Ethermint.
-
-1. [Truffle](./truffle.md)
-2. [Metamask](./metamask.md)
-3. [Remix](./remix.md)
-4. [Deploy Testnet on Cloud Provider](./cloud_testnet.md)
+1. Localnet
+    * [Single Node Localnet](./localnet/single_node)
+    * [Multi Node Localnet](./localnet/multi_node)
+2. Keys and Wallets
+    * [Keyring](./keys-wallets/keyring)
+    * [MetaMask](./keys-wallets/metamask)
+3. Ethereum Tooling
+    * [Remix](./tools/remix)
+    * [Hardhat](./tools/hardhat)
+    * [Truffle](./tools/truffle)
+4. [Validators](./validators/overview)
+5. [Key Management System](./kms/kms)
